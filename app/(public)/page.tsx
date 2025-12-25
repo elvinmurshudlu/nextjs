@@ -1,18 +1,28 @@
-import prisma from "@/lib/prisma";
 import UserForm from "@/components/UserCreate/UserForm";
+import {auth} from "@/lib/auth";
+import {headers} from "next/headers";
+import {logout} from "@/components/UserCreate/userAction";
+import UserLogin from "@/components/UserCreate/UserLogin";
 
 export default async function Home() {
-  const user = await prisma.user.findMany()
-  return (
-      <h1>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate, sapiente.
 
-          {
-              user.map(u=>{
-                  return <p key={u.id}>{u.email}</p>
-              })
-          }
+    const session = await auth.api.getSession({
+        headers: await headers()
+    })
 
-          <UserForm/>
-      </h1>
-  );
+    if (!session) {
+        return <>
+            <UserLogin/>
+
+        </>
+    }
+
+    return (
+        <h1>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate, sapiente.
+            <form action={logout}>
+                <button type={'submit'} >Hesabdan cix</button>
+            </form>
+        </h1>
+    );
 }
+
