@@ -27,7 +27,11 @@ function BlogForm() {
         resolver:zodResolver(validation)
     })
 
-    const {execute,isPending} = useAction(createBlogAction)
+    const {execute,isPending,} = useAction(createBlogAction,{
+        onError:(e)=>{
+            console.log(e,'ERROR')
+        }
+    })
 
     return (
         <FormBuilder onSubmitAction={execute} form={form} className={'flex flex-col gap-2'}>

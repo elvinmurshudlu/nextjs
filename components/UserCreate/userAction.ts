@@ -3,11 +3,12 @@
 import {auth} from "@/lib/auth";
 import {redirect} from "next/navigation";
 import {headers} from "next/headers";
-import {actionClient} from "@/lib/safe-action";
+import {actionClient, authActionClient} from "@/lib/safe-action";
 import {loginValidationSchema} from "@/components/UserCreate/schema";
 
 import prisma from "@/lib/prisma";
 import * as zod from "zod";
+import {flattenValidationErrors} from "next-safe-action";
 
 
 const validation = zod.object({
@@ -71,7 +72,7 @@ export const loginAction = actionClient.inputSchema(loginValidationSchema).actio
     })
 })
 
-export const createBlogAction = actionClient.inputSchema(validation).action(async ({parsedInput}) => {
+export const createBlogAction = authActionClient.inputSchema(validation, ).action(async ({parsedInput}) => {
 
     console.log(parsedInput, 'ParsedInput')
     await prisma.blog.create({
