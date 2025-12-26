@@ -72,9 +72,8 @@ export const loginAction = actionClient.inputSchema(loginValidationSchema).actio
     })
 })
 
-export const createBlogAction = authActionClient.inputSchema(validation, ).action(async ({parsedInput}) => {
+export const createBlogAction = authActionClient.inputSchema(validation).action(async ({parsedInput,ctx}) => {
 
-    console.log(parsedInput, 'ParsedInput')
     await prisma.blog.create({
         data: parsedInput
     })
