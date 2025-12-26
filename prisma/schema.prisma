@@ -75,3 +75,18 @@ model Verification {
   @@index([identifier])
   @@map("verification")
 }
+
+model Blog {
+  id          String   @id @default(cuid())
+  title       String
+  description String
+  stoppedDate DateTime
+
+  beginDate DateTime
+  endDate   DateTime
+
+  status String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
