@@ -3,6 +3,19 @@
 import {auth} from "@/lib/auth";
 import {redirect} from "next/navigation";
 import {headers} from "next/headers";
+import {actionClient} from "@/lib/safe-action";
+import {loginValidationSchema} from "@/components/UserCreate/schema";
+
+
+
+
+
+
+function sleep(ms:number){
+    return new Promise((res=>{
+        setTimeout(res,ms)
+    }))
+}
 
 export async function createUser(userCredential: FormData) {
     const name = userCredential.get('name')?.toString() ?? ''
@@ -35,3 +48,16 @@ export async  function login(userCredential: FormData){
         }
     })
 }
+
+export async function testAction(){
+    await sleep(3000)
+}
+
+export const loginAction = actionClient.inputSchema(loginValidationSchema).action(async ({parsedInput})=>{
+    await  auth.api.signInEmail({
+        body:{
+            email :parsedInput.email,
+            password:parsedInput.password
+        }
+    })
+})

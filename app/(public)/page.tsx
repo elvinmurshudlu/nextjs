@@ -1,8 +1,9 @@
-import UserForm from "@/components/UserCreate/UserForm";
 import {auth} from "@/lib/auth";
 import {headers} from "next/headers";
 import {logout} from "@/components/UserCreate/userAction";
 import UserLogin from "@/components/UserCreate/UserLogin";
+import UserForm from "@/components/UserCreate/UserForm";
+import LoginForm from "@/components/UserCreate/LoginForm";
 
 export default async function Home() {
 
@@ -12,17 +13,22 @@ export default async function Home() {
 
     if (!session) {
         return <>
-            <UserLogin/>
+            <LoginForm/>
 
         </>
     }
 
     return (
-        <h1>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate, sapiente.
-            <form action={logout}>
-                <button type={'submit'} >Hesabdan cix</button>
-            </form>
-        </h1>
+        <div className={'p-4 flex items-center flex-col justify-center gap-4'}>
+            <h1>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate, sapiente.
+                <form action={logout}>
+                    <button type={'submit'} >Hesabdan cix</button>
+                </form>
+            </h1>
+
+
+
+        </div>
     );
 }
 
