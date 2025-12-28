@@ -17,6 +17,6 @@ export const authActionClient = actionClient.use(
             headers: await headers(),
         })
         if (!session) throw new Error("Session not found!")
-        return next({ ctx: { userId: session.user.id } })
+        return next({ ctx: { userId: session.user.id,user: session.user } })
     },
 )
