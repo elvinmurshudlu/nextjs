@@ -1,16 +1,18 @@
 import React, {Suspense} from 'react';
 import prisma from "@/lib/prisma";
-import {sleep} from "@/components/UserCreate/userAction";
 import BlogForm from "@/components/UserCreate/BlogForm";
 
 
 async function Page( ) {
+
+
 
     return <>
         <Suspense fallback={<div>Loading screen</div>}>
             <Blogs></Blogs>
         </Suspense>
         <BlogForm/>
+        <h1>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Exercitationem, recusandae?</h1>
 
     </>
 
@@ -19,13 +21,13 @@ async function Page( ) {
 export default Page;
 
 
-async function Blogs(){
+async function Blogs() {
     const blog = await prisma.blog.findMany()
 
     return (
         <div>
             {
-                blog.map(b=>{
+                blog.map(b => {
                     return <div key={b.id}>
                         <h6>Title: {b.title}</h6>
                         <p>Desc : {b.description}</p>
@@ -38,6 +40,6 @@ async function Blogs(){
                     </div>
                 })
             }
-        </div> )
+        </div>)
 }
 
