@@ -3,13 +3,21 @@ import {headers} from "next/headers";
 import {logout} from "@/components/UserCreate/userAction";
 
 import LoginForm from "@/components/UserCreate/LoginForm";
+import {getTranslations, setRequestLocale} from "next-intl/server";
 
-export default async function Home() {
+export default async function Home({params}:{params:Promise<Record<string,string>>}) {
+    const {locale} = await params;
+    setRequestLocale(locale);
+
     const session = await auth.api.getSession({
         headers: await headers()
     })
+    const t = await getTranslations('HomePage');
+
     if (!session) {
         return <>
+            {t('title')}
+            <h1>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque, veniam.</h1>
             <LoginForm/>
         </>
     }
