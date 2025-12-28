@@ -27,7 +27,6 @@ export default async function Home({
                 {t("title")}
                 <h1>
                     Lorem ipsum dolor sit amet, consectetur
-
                     adipisicing elit. Atque, veniam.
                 </h1>{" "}
                 <LoginForm />
