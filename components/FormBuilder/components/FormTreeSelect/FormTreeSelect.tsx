@@ -1,15 +1,20 @@
-import {IFormComponent} from "@/components/FormBuilder/type";
-import { TreeSelect, TreeSelectProps} from "antd";
-import ComponentWrapper from "@/components/FormBuilder/ComponentWrapper/InputWrapper";
-import {Controller, useFormContext} from "react-hook-form";
-import clsx from "clsx";
-
+import { IFormComponent } from "@/components/FormBuilder/type"
+import { TreeSelect, TreeSelectProps } from "antd"
+import ComponentWrapper from "@/components/FormBuilder/ComponentWrapper/InputWrapper"
+import { Controller, useFormContext } from "react-hook-form"
+import clsx from "clsx"
 
 type FormTreeSelectProps = IFormComponent & TreeSelectProps
 
-function FormTreeSelect({className, label, fieldName, dependOn,classNames, ...inputProps}: FormTreeSelectProps) {
-    const {control,} = useFormContext()
-
+function FormTreeSelect({
+    className,
+    label,
+    fieldName,
+    dependOn,
+    classNames,
+    ...inputProps
+}: FormTreeSelectProps) {
+    const { control } = useFormContext()
 
     return (
         <ComponentWrapper
@@ -18,11 +23,25 @@ function FormTreeSelect({className, label, fieldName, dependOn,classNames, ...in
             fieldName={fieldName}
             className={className}
         >
-            <Controller render={({field}) => {
-                return <TreeSelect className={clsx(classNames,'w-full')}  id={fieldName} {...field} {...inputProps}/>
-            }} name={fieldName} control={control}/>
+            <Controller
+                render={({ field }) => {
+                    return (
+                        <TreeSelect
+                            className={clsx(
+                                classNames,
+                                "w-full",
+                            )}
+                            id={fieldName}
+                            {...field}
+                            {...inputProps}
+                        />
+                    )
+                }}
+                name={fieldName}
+                control={control}
+            />
         </ComponentWrapper>
-    );
+    )
 }
 
-export default FormTreeSelect;
+export default FormTreeSelect

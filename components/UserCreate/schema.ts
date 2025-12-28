@@ -1,7 +1,6 @@
-import * as zod from 'zod'
-
+import * as zod from "zod"
 
 export const loginValidationSchema = zod.object({
-    email:zod.email(),
-    password:zod.string().min(8)
+    email: zod.email(),
+    password: zod.string().min(8),
 })

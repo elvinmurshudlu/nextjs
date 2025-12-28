@@ -1,17 +1,15 @@
-import {PropsWithChildren} from "react";
-import {auth} from "@/lib/auth";
-import {headers} from "next/headers";
-import {redirect} from "next/navigation";
+import { PropsWithChildren } from "react"
+import { auth } from "@/lib/auth"
+import { headers } from "next/headers"
+import { redirect } from "next/navigation"
 
-async function Layout( {children}:PropsWithChildren) {
+async function Layout({ children }: PropsWithChildren) {
     const session = await auth.api.getSession({
-        headers:await headers()
+        headers: await headers(),
     })
-    if(!session)  redirect('/')
+    if (!session) redirect("/")
 
-    return (
-        <>{children}</>
-    );
+    return <>{children}</>
 }
 
-export default Layout;
+export default Layout

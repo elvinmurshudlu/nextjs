@@ -1,15 +1,20 @@
-import {IFormComponent} from "@/components/FormBuilder/type";
-import {  Select, SelectProps} from "antd";
-import ComponentWrapper from "@/components/FormBuilder/ComponentWrapper/InputWrapper";
-import {Controller, useFormContext} from "react-hook-form";
-import clsx from "clsx";
-
+import { IFormComponent } from "@/components/FormBuilder/type"
+import { Select, SelectProps } from "antd"
+import ComponentWrapper from "@/components/FormBuilder/ComponentWrapper/InputWrapper"
+import { Controller, useFormContext } from "react-hook-form"
+import clsx from "clsx"
 
 type FormSelectProps = IFormComponent & SelectProps
 
-function FormSelect({className, label, fieldName, dependOn,classNames, ...inputProps}: FormSelectProps) {
-    const {control,} = useFormContext()
-
+function FormSelect({
+    className,
+    label,
+    fieldName,
+    dependOn,
+    classNames,
+    ...inputProps
+}: FormSelectProps) {
+    const { control } = useFormContext()
 
     return (
         <ComponentWrapper
@@ -18,11 +23,25 @@ function FormSelect({className, label, fieldName, dependOn,classNames, ...inputP
             fieldName={fieldName}
             className={className}
         >
-            <Controller render={({field}) => {
-                return <Select className={clsx(classNames,'w-full')}  id={fieldName} {...field} {...inputProps}/>
-            }} name={fieldName} control={control}/>
+            <Controller
+                render={({ field }) => {
+                    return (
+                        <Select
+                            className={clsx(
+                                classNames,
+                                "w-full",
+                            )}
+                            id={fieldName}
+                            {...field}
+                            {...inputProps}
+                        />
+                    )
+                }}
+                name={fieldName}
+                control={control}
+            />
         </ComponentWrapper>
-    );
+    )
 }
 
-export default FormSelect;
+export default FormSelect

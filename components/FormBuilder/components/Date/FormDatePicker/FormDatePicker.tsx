@@ -1,15 +1,23 @@
-import {IFormComponent} from "@/components/FormBuilder/type";
-import {DatePicker, type DatePickerProps,  } from "antd";
-import ComponentWrapper from "@/components/FormBuilder/ComponentWrapper/InputWrapper";
-import {Controller, useFormContext} from "react-hook-form";
-import dayjs from "dayjs";
-import {default_time_format, showFormat} from "@/components/FormBuilder/components/Date/format";
+import { IFormComponent } from "@/components/FormBuilder/type"
+import { DatePicker, type DatePickerProps } from "antd"
+import ComponentWrapper from "@/components/FormBuilder/ComponentWrapper/InputWrapper"
+import { Controller, useFormContext } from "react-hook-form"
+import dayjs from "dayjs"
+import {
+    default_time_format,
+    showFormat,
+} from "@/components/FormBuilder/components/Date/format"
 
 type FormDatePickerProps = IFormComponent & DatePickerProps
 
-function FormDatePicker({className, label, fieldName, dependOn, ...props}: FormDatePickerProps) {
-    const {control,} = useFormContext()
-
+function FormDatePicker({
+    className,
+    label,
+    fieldName,
+    dependOn,
+    ...props
+}: FormDatePickerProps) {
+    const { control } = useFormContext()
 
     return (
         <ComponentWrapper
@@ -18,21 +26,49 @@ function FormDatePicker({className, label, fieldName, dependOn, ...props}: FormD
             fieldName={fieldName}
             className={className}
         >
-            <Controller render={({field}) => {
-                return <DatePicker placeholder={label} format={props.format as string ??
-                    showFormat} style={{width: "100%"}}
-                                   value={field.value ? dayjs(field.value, props.format as string ??
-                                       default_time_format) : undefined}  {...props} id={fieldName}
-                                   onChange={(date) => date && !Array.isArray(date) ?
-                                       field.onChange(dayjs(date).format(props.format as string
-                                           ??
-                                           default_time_format).toString())
-                                       :
-                                       field.onChange(undefined)}
-                ></DatePicker>
-            }} name={fieldName} control={control}/>
+            <Controller
+                render={({ field }) => {
+                    return (
+                        <DatePicker
+                            placeholder={label}
+                            format={
+                                (props.format as string) ??
+                                showFormat
+                            }
+                            style={{ width: "100%" }}
+                            value={
+                                field.value
+                                    ? dayjs(
+                                          field.value,
+                                          (props.format as string) ??
+                                              default_time_format,
+                                      )
+                                    : undefined
+                            }
+                            {...props}
+                            id={fieldName}
+                            onChange={(date) =>
+                                date && !Array.isArray(date)
+                                    ? field.onChange(
+                                          dayjs(date)
+                                              .format(
+                                                  (props.format as string) ??
+                                                      default_time_format,
+                                              )
+                                              .toString(),
+                                      )
+                                    : field.onChange(
+                                          undefined,
+                                      )
+                            }
+                        ></DatePicker>
+                    )
+                }}
+                name={fieldName}
+                control={control}
+            />
         </ComponentWrapper>
-    );
+    )
 }
 
-export default FormDatePicker;
+export default FormDatePicker
