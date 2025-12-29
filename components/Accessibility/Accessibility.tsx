@@ -136,11 +136,10 @@ function Accessibility() {
                 onClose={() => setOpen(false)}
                 open={open}
                 key={"left"}
-                styles={{
-                    mask: {
-                        backgroundColor: "transparent",
-                    },
+                mask={{
+                    blur:false
                 }}
+
             >
                 <div
                     className={
