@@ -9,7 +9,7 @@ import {
     useRef,
     useState,
 } from "react"
-import { useAccessibility } from "@/components/Accessibility/AccesbilityProvider"
+import {useAccessibility} from "@/components/Accessibility/AccesbilityProvider"
 
 export type LevelCardProps = {
     icon: ReactNode
@@ -25,20 +25,19 @@ type Levels = {
 }
 
 const LevelCard = memo(function LevelCard({
-    icon,
-    title,
-    levels,
-
-    keyName,
-}: LevelCardProps) {
+                                              icon,
+                                              title,
+                                              levels,
+                                              keyName,
+                                          }: LevelCardProps) {
     const [currentLevel, setCurrentLevel] =
         useState<number>(-1)
 
     const current =
         currentLevel === -1
-            ? { icon, title }
+            ? {icon, title}
             : levels[currentLevel]
-    const { setSettings } = useAccessibility()
+    const {setSettings, } = useAccessibility()
     const addParams = useCallback(
         (key: string, value: string | number) => {
             setSettings((prev) => ({
@@ -66,8 +65,9 @@ const LevelCard = memo(function LevelCard({
         ) {
             addParams(keyName, levels[currentLevel].value)
         } else if (currentLevel == -1)
-            addParams(keyName, "")
+            addParams(keyName, '')
     }, [currentLevel, levels, addParams, keyName])
+
 
     return (
         <div
@@ -98,9 +98,9 @@ const LevelCard = memo(function LevelCard({
 export default LevelCard
 
 function LevelBadge({
-    levels,
-    current,
-}: {
+                        levels,
+                        current,
+                    }: {
     levels: Levels[]
     current: number
 }) {

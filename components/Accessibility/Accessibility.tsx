@@ -12,10 +12,12 @@ import { CgEditContrast } from "react-icons/cg"
 import { TbContrast2Filled } from "react-icons/tb"
 import { PiCursorThin } from "react-icons/pi"
 import { IoLink } from "react-icons/io5"
+import {useAccessibility} from "@/components/Accessibility/AccesbilityProvider";
 
 function Accessibility() {
     const t = useTranslations("Accessibility")
     const [open, setOpen] = useState(false)
+    const {setSettings} = useAccessibility()
 
     const levelCard = useMemo<LevelCardProps[]>(() => {
         return [
@@ -139,6 +141,7 @@ function Accessibility() {
                 }}
             >
                 <LevelCards cards={levelCard} />
+                <Button onClick={()=>setSettings({})}>Bütün Əlçatımlılıq Parametrlərini sıfırlayın</Button>
             </Drawer>
         </>
     )
