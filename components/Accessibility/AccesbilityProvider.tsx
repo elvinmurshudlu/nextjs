@@ -40,14 +40,17 @@ function AccessibilityProvider({
             value={{ setSettings, settings }}
         >
             <div
-                style={{ zoom: settings["zoom"] }}
-                className={clsx({
+                style={{ zoom: settings["zoom"],
+                filter: settings["filter"]
+                }}
+                className={clsx('bg-white h-full',{
                     "scale-100":
                         settings["scale"] === "110%",
                     "scale-110":
                         settings["scale"] === "130%",
                     "scale-140":
                         settings["scale"] === "140%",
+
                 })}
             >
                 {children}

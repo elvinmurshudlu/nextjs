@@ -5,7 +5,8 @@ import {
     memo,
     ReactNode,
     useCallback,
-    useEffect, useRef,
+    useEffect,
+    useRef,
     useState,
 } from "react"
 
@@ -27,7 +28,6 @@ const LevelCard = memo(function LevelCard({
     levels,
     onClear,
 }: LevelCardProps) {
-
     const [currentLevel, setCurrentLevel] =
         useState<number>(-1)
 
@@ -57,13 +57,16 @@ const LevelCard = memo(function LevelCard({
             }
             return _next
         })
-    }, [ setCurrentLevel,levels])
+    }, [setCurrentLevel, levels])
 
     useEffect(() => {
-        if (currentLevel >= 0 && currentLevel < levels.length) {
+        if (
+            currentLevel >= 0 &&
+            currentLevel < levels.length
+        ) {
             levels[currentLevel].onClick()
-        }else if (currentLevel==-1)onClear?.()
-    }, [currentLevel, levels,onClear])
+        } else if (currentLevel == -1) onClear?.()
+    }, [currentLevel, levels, onClear])
 
     return (
         <div

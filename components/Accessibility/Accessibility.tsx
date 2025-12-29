@@ -1,30 +1,30 @@
 "use client"
 
-import { Button, Drawer } from "antd"
-import { FaUniversalAccess } from "react-icons/fa"
+import {Button, Drawer} from "antd"
+import {FaUniversalAccess} from "react-icons/fa"
 import {
     useCallback,
     useEffect,
     useMemo,
     useState,
 } from "react"
-import { useTranslations } from "next-intl"
+import {useTranslations} from "next-intl"
 import LevelCard, {
     LevelCardProps,
 } from "@/components/Accessibility/components/LevelCard"
-import { MdOutlineAccessAlarm } from "react-icons/md"
-import { IoIosContrast } from "react-icons/io"
+import {MdOutlineAccessAlarm} from "react-icons/md"
+import {IoIosContrast} from "react-icons/io"
 import {
     BsDisplay,
     BsFillDisplayFill,
     BsPcDisplay,
 } from "react-icons/bs"
-import { RiText } from "react-icons/ri"
-import { useAccessibility } from "@/components/Accessibility/AccesbilityProvider"
-import { LevelCards } from "@/components/Accessibility/components/LevelCards"
+import {RiText} from "react-icons/ri"
+import {useAccessibility} from "@/components/Accessibility/AccesbilityProvider"
+import {LevelCards} from "@/components/Accessibility/components/LevelCards"
 
 function Accessibility() {
-    const { setSettings } = useAccessibility()
+    const {setSettings} = useAccessibility()
     const t = useTranslations("Accessibility")
     const [open, setOpen] = useState(false)
 
@@ -41,12 +41,17 @@ function Accessibility() {
     const levelCard = useMemo(() => {
         return [
             {
-                icon: <IoIosContrast />,
+                icon: <IoIosContrast/>,
                 title: "Contrasts",
-                levels: [],
+                levels: [{
+                    title: "Bigger Text",
+                    onClick: () =>
+                        addParams("filter", "invert(100%)"),
+                    icon: <RiText size={22}/>,
+                }],
             },
             {
-                icon: <RiText size={20} />,
+                icon: <RiText size={20}/>,
                 title: "Bigger Text",
                 onClear: () => addParams("zoom", "1"),
                 levels: [
@@ -101,7 +106,7 @@ function Accessibility() {
                     },
                 }}
             >
-                <LevelCards cards={levelCard} />
+                <LevelCards cards={levelCard}/>
             </Drawer>
         </>
     )
