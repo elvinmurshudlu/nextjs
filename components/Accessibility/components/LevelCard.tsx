@@ -5,7 +5,7 @@ import {
     memo,
     ReactNode,
     useCallback,
-    useEffect,
+    useEffect, useRef,
     useState,
 } from "react"
 
@@ -27,6 +27,7 @@ const LevelCard = memo(function LevelCard({
     levels,
     onClear,
 }: LevelCardProps) {
+
     const [currentLevel, setCurrentLevel] =
         useState<number>(-1)
 
@@ -35,16 +36,35 @@ const LevelCard = memo(function LevelCard({
             ? { icon, title }
             : levels[currentLevel]
 
+    // const stepOnClick = useCallback(() => {
+    //     setCurrentLevel((curr) => {
+    //         const _next = curr + 1
+    //         if (_next >= levels.length) {
+    //             onClear?.()
+    //             return -1
+    //         }
+    //         levels[_next].onClick()
+    //         return _next
+    //     })
+    // }, [setCurrentLevel, onClear, levels])
+
     const stepOnClick = useCallback(() => {
         setCurrentLevel((curr) => {
             const _next = curr + 1
             if (_next >= levels.length) {
-                onClear?.()
+                // onClear?.()
                 return -1
             }
             return _next
         })
-    }, [setCurrentLevel, onClear, levels])
+    }, [ setCurrentLevel,levels])
+
+    useEffect(() => {
+        if (currentLevel >= 0 && currentLevel < levels.length) {
+            levels[currentLevel].onClick()
+        }else if (currentLevel==-1)onClear?.()
+    }, [currentLevel, levels,onClear])
+
     return (
         <div
             onClick={stepOnClick}
@@ -57,7 +77,11 @@ const LevelCard = memo(function LevelCard({
                 },
             )}
         >
-            <div className={"text-2xl"}>{current.icon}</div>
+            <div className="w-12 h-7 flex items-center justify-center">
+                <div className="text-2xl transition-all duration-200">
+                    {current.icon}
+                </div>
+            </div>
             <h5 className={"text-base"}>{current.title}</h5>
             <LevelBadge
                 levels={levels}
@@ -76,9 +100,9 @@ function LevelBadge({
     levels: Levels[]
     current: number
 }) {
-    useEffect(() => {
-        if (current >= 0) levels[current].onClick()
-    }, [current, levels])
+    // useEffect(() => {
+    //     if (current >= 0) levels[current].onClick()
+    // }, [current, levels])
 
     return (
         <div

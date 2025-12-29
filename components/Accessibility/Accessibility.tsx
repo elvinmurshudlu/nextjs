@@ -46,29 +46,29 @@ function Accessibility() {
                 levels: [],
             },
             {
-                icon: <IoIosContrast />,
+                icon: <RiText size={20} />,
                 title: "Bigger Text",
                 onClear: () => addParams("zoom", "1"),
                 levels: [
                     {
-                        title: "Bigger text",
+                        title: "Bigger Text",
                         onClick: () =>
                             addParams("zoom", "1.2"),
-                        icon: <RiText />,
+                        icon: <RiText size={22}/>,
                     },
                     {
-                        title: "Bigger text",
+                        title: "Bigger Text",
                         onClick: () =>
                             addParams("zoom", "1.3"),
 
-                        icon: <RiText />,
+                        icon: <RiText size={24}/>,
                     },
                     {
-                        title: "Bigger text",
+                        title: "Bigger Text",
                         onClick: () =>
                             addParams("zoom", "1.5"),
 
-                        icon: <RiText />,
+                        icon: <RiText size={26}/>,
                     },
                 ],
             },
