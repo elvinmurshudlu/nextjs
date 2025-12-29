@@ -1,16 +1,16 @@
-import type {Metadata} from "next"
-import {Geist, Geist_Mono} from "next/font/google"
+import type { Metadata } from "next"
+import { Geist, Geist_Mono } from "next/font/google"
 import "./globals.css"
-import {AntdRegistry} from "@ant-design/nextjs-registry"
+import { AntdRegistry } from "@ant-design/nextjs-registry"
 import Header from "@/components/Header/Header"
 import {
     hasLocale,
     NextIntlClientProvider,
 } from "next-intl"
-import {routing} from "@/i18n/routing"
-import {notFound} from "next/navigation"
-import {setRequestLocale} from "next-intl/server"
-import AccesbilityProvider from "@/components/Accessibility/AccesbilityProvider";
+import { routing } from "@/i18n/routing"
+import { notFound } from "next/navigation"
+import { setRequestLocale } from "next-intl/server"
+import AccesbilityProvider from "@/components/Accessibility/AccesbilityProvider"
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
@@ -26,35 +26,35 @@ export const metadata: Metadata = {
 }
 
 export function generateStaticParams() {
-    return routing.locales.map((locale) => ({locale}))
+    return routing.locales.map((locale) => ({ locale }))
 }
 
 export default async function RootLayout({
-                                             children,
-                                             params,
-                                         }: Readonly<{
+    children,
+    params,
+}: Readonly<{
     children: React.ReactNode
     params: Promise<Record<string, unknown>>
 }>) {
-    const {locale} = await params
+    const { locale } = await params
     if (!hasLocale(routing.locales, locale)) {
         notFound()
     }
     setRequestLocale(locale)
     return (
         <html lang={locale}>
-        <body
-            className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-        >
-        <NextIntlClientProvider>
-            <AntdRegistry>
-                <AccesbilityProvider>
-                    <Header/>
-                    {children}
-                </AccesbilityProvider>
-            </AntdRegistry>
-        </NextIntlClientProvider>
-        </body>
+            <body
+                className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+            >
+                <NextIntlClientProvider>
+                    <AntdRegistry>
+                        <AccesbilityProvider>
+                            <Header />
+                            {children}
+                        </AccesbilityProvider>
+                    </AntdRegistry>
+                </NextIntlClientProvider>
+            </body>
         </html>
     )
 }

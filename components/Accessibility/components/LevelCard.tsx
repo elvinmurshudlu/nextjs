@@ -1,13 +1,19 @@
 "use client"
 
 import clsx from "clsx"
-import {memo, ReactNode, useCallback, useEffect, useState} from "react"
+import {
+    memo,
+    ReactNode,
+    useCallback,
+    useEffect,
+    useState,
+} from "react"
 
 export type LevelCardProps = {
     icon: ReactNode
     title: string
-    levels: Levels[],
-    onClear?:()=>void
+    levels: Levels[]
+    onClear?: () => void
 }
 type Levels = {
     icon: ReactNode
@@ -16,12 +22,11 @@ type Levels = {
 }
 
 const LevelCard = memo(function LevelCard({
-                                              icon,
-                                              title,
-                                              levels,
-                                              onClear
-
-                                          }: LevelCardProps) {
+    icon,
+    title,
+    levels,
+    onClear,
+}: LevelCardProps) {
     const [currentLevel, setCurrentLevel] =
         useState<number>(-1)
 
@@ -30,8 +35,7 @@ const LevelCard = memo(function LevelCard({
             ? { icon, title }
             : levels[currentLevel]
 
-
-    const stepOnClick =  useCallback(()=>{
+    const stepOnClick = useCallback(() => {
         setCurrentLevel((curr) => {
             const _next = curr + 1
             if (_next >= levels.length) {
@@ -40,7 +44,7 @@ const LevelCard = memo(function LevelCard({
             }
             return _next
         })
-    },[setCurrentLevel,onClear,levels])
+    }, [setCurrentLevel, onClear, levels])
     return (
         <div
             onClick={stepOnClick}
@@ -58,7 +62,6 @@ const LevelCard = memo(function LevelCard({
             <LevelBadge
                 levels={levels}
                 current={currentLevel}
-
             />
         </div>
     )
@@ -69,16 +72,13 @@ export default LevelCard
 function LevelBadge({
     levels,
     current,
-
 }: {
     levels: Levels[]
-    current: number,
-
+    current: number
 }) {
     useEffect(() => {
         if (current >= 0) levels[current].onClick()
-
-    }, [current, levels ])
+    }, [current, levels])
 
     return (
         <div
