@@ -1,14 +1,14 @@
-import {PropsWithChildren} from "react";
-import Accessibility from "@/components/Accessibility/Accessibility";
+import { PropsWithChildren } from "react"
+import Accessibility from "@/components/Accessibility/Accessibility"
 
-function Layout({children}: PropsWithChildren) {
+function Layout({ children }: PropsWithChildren) {
     return (
-        < >
+        <>
             {children}
 
-            <Accessibility/>
-        </ >
-    );
+            <Accessibility />
+        </>
+    )
 }
 
-export default Layout;
+export default Layout

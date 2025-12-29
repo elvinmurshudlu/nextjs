@@ -1,9 +1,7 @@
 {
-  "HomePage": {
-    "title": "Hello world!",
-    "description": "About details in contact page in English"
-  },
-  "Accessibility": {
-    "menu": "Accessibility Menu"
-  }
+    "HomePage": {
+        "title": "Hello world!",
+        "description": "About details in contact page in English"
+    },
+    "Accessibility": { "menu": "Accessibility Menu" }
 }

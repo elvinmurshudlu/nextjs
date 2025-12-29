@@ -3,7 +3,5 @@
         "title": "Salam",
         "description": "Contacy səhifəsi haqqında məlumat"
     },
-    "Accessibility": {
-      "menu": "Müyəssərlik Menyusu"
-    }
+    "Accessibility": { "menu": "Müyəssərlik Menyusu" }
 }
