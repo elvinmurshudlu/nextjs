@@ -13,11 +13,12 @@ import { TbContrast2Filled } from "react-icons/tb"
 import { PiCursorThin } from "react-icons/pi"
 import { IoLink } from "react-icons/io5"
 import { useAccessibility } from "@/components/Accessibility/AccesbilityProvider"
+import {TfiReload} from "react-icons/tfi";
 
 function Accessibility() {
     const t = useTranslations("Accessibility")
     const [open, setOpen] = useState(false)
-    const { setSettings } = useAccessibility()
+    const { setSettings ,setCurrentStateOfLevels} = useAccessibility()
 
     const levelCard = useMemo<LevelCardProps[]>(() => {
         return [
@@ -140,11 +141,19 @@ function Accessibility() {
                     },
                 }}
             >
-                <LevelCards cards={levelCard} />
-                <Button onClick={() => setSettings({})}>
-                    Bütün Əlçatımlılıq Parametrlərini
-                    sıfırlayın
-                </Button>
+                <div className={'flex flex-col h-full justify-between'}>
+                    <LevelCards cards={levelCard} />
+
+                    <Button size={'large'} className={'mt-2'} icon={<TfiReload />} type={'primary'} onClick={() => {
+                        setSettings({})
+                        setCurrentStateOfLevels({})
+
+                    }}>
+                        Bütün Əlçatımlılıq Parametrlərini
+                        sıfırlayın
+                    </Button>
+                </div>
+
             </Drawer>
         </>
     )

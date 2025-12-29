@@ -30,8 +30,11 @@ const LevelCard = memo(function LevelCard({
     levels,
     keyName,
 }: LevelCardProps) {
-    const [currentLevel, setCurrentLevel] =
-        useState<number>(-1)
+    // const [currentLevel, setCurrentLevel] =
+    //     useState<number>(-1)
+
+    const {currentStateOfLevels,setCurrentStateOfLevels} = useAccessibility()
+    const currentLevel = currentStateOfLevels[keyName] ?? -1
 
     const current =
         currentLevel === -1
@@ -47,16 +50,32 @@ const LevelCard = memo(function LevelCard({
         },
         [setSettings],
     )
+    // const stepOnClick = useCallback(() => {
+    //     setCurrentLevel((curr) => {
+    //         const _next = curr + 1
+    //         if (_next >= levels.length) {
+    //             // onClear?.()
+    //             return -1
+    //         }
+    //         return _next
+    //     })
+    // }, [setCurrentLevel, levels])
+
+
     const stepOnClick = useCallback(() => {
-        setCurrentLevel((curr) => {
-            const _next = curr + 1
+        setCurrentStateOfLevels(prev=>{
+            const curr = prev[keyName] ?? -1
+            let _next = curr + 1
             if (_next >= levels.length) {
                 // onClear?.()
-                return -1
+                _next =  -1
             }
-            return _next
+            return {
+                ...prev,
+                [keyName]:_next
+            }
         })
-    }, [setCurrentLevel, levels])
+    }, [setCurrentStateOfLevels, levels,keyName])
 
     useEffect(() => {
         if (

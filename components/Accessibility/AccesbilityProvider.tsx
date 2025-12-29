@@ -15,7 +15,9 @@ type SettingsProps = Record<string, string | number>
 
 const AccessibilityContext = createContext<{
     settings: SettingsProps
-    setSettings: Dispatch<SetStateAction<SettingsProps>>
+    setSettings: Dispatch<SetStateAction<SettingsProps>>,
+    currentStateOfLevels: Record<string, number>,
+    setCurrentStateOfLevels: Dispatch<SetStateAction<Record<string, number>>>
 } | null>(null)
 
 export function useAccessibility() {
@@ -27,16 +29,19 @@ export function useAccessibility() {
     return context
 }
 
+
+
+
+
 function AccessibilityProvider({
     children,
 }: PropsWithChildren) {
-    const [settings, setSettings] = useState<SettingsProps>(
-        {},
-    )
+    const [settings, setSettings] = useState<SettingsProps>({})
+    const [currentStateOfLevels,setCurrentStateOfLevels] = useState<Record<string, number>>({})
 
     return (
         <AccessibilityContext
-            value={{ setSettings, settings }}
+            value={{ setSettings, settings ,setCurrentStateOfLevels,currentStateOfLevels}}
         >
             <div
                 style={{
