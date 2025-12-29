@@ -1,12 +1,13 @@
 "use client"
 
 import clsx from "clsx"
-import { ReactNode, useEffect, useState } from "react"
+import {memo, ReactNode, useCallback, useEffect, useState} from "react"
 
-type LevelCardProps = {
+export type LevelCardProps = {
     icon: ReactNode
     title: string
-    levels: Levels[]
+    levels: Levels[],
+    onClear?:()=>void
 }
 type Levels = {
     icon: ReactNode
@@ -14,11 +15,13 @@ type Levels = {
     onClick: () => void
 }
 
-function LevelCard({
-    icon,
-    title,
-    levels,
-}: LevelCardProps) {
+const LevelCard = memo(function LevelCard({
+                                              icon,
+                                              title,
+                                              levels,
+                                              onClear
+
+                                          }: LevelCardProps) {
     const [currentLevel, setCurrentLevel] =
         useState<number>(-1)
 
@@ -27,15 +30,20 @@ function LevelCard({
             ? { icon, title }
             : levels[currentLevel]
 
+
+    const stepOnClick =  useCallback(()=>{
+        setCurrentLevel((curr) => {
+            const _next = curr + 1
+            if (_next >= levels.length) {
+                onClear?.()
+                return -1
+            }
+            return _next
+        })
+    },[setCurrentLevel,onClear,levels])
     return (
         <div
-            onClick={() => {
-                setCurrentLevel((curr) => {
-                    const _next = curr + 1
-                    if (_next >= levels.length) return -1
-                    return _next
-                })
-            }}
+            onClick={stepOnClick}
             className={clsx(
                 "flex select-none flex-col items-center transition-all duration-150 gap-2 cursor-pointer border-2  p-4 rounded-lg hover:border-blue-500",
                 {
@@ -50,23 +58,27 @@ function LevelCard({
             <LevelBadge
                 levels={levels}
                 current={currentLevel}
+
             />
         </div>
     )
-}
+})
 
 export default LevelCard
 
 function LevelBadge({
     levels,
     current,
+
 }: {
     levels: Levels[]
-    current: number
+    current: number,
+
 }) {
     useEffect(() => {
         if (current >= 0) levels[current].onClick()
-    }, [current, levels])
+
+    }, [current, levels ])
 
     return (
         <div

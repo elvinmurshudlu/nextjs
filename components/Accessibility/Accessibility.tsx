@@ -2,9 +2,9 @@
 
 import { Button, Drawer } from "antd"
 import { FaUniversalAccess } from "react-icons/fa"
-import { useState } from "react"
+import {useCallback, useEffect, useMemo, useState} from "react"
 import { useTranslations } from "next-intl"
-import LevelCard from "@/components/Accessibility/components/LevelCard"
+import LevelCard, {LevelCardProps} from "@/components/Accessibility/components/LevelCard"
 import { MdOutlineAccessAlarm } from "react-icons/md"
 import { IoIosContrast } from "react-icons/io"
 import {
@@ -12,10 +12,52 @@ import {
     BsFillDisplayFill,
     BsPcDisplay,
 } from "react-icons/bs"
+import {RiText} from "react-icons/ri";
+import {useAccessibility} from "@/components/Accessibility/AccesbilityProvider";
+import {LevelCards} from "@/components/Accessibility/components/LevelCards";
 
 function Accessibility() {
+    const {setSettings} = useAccessibility()
     const t = useTranslations("Accessibility")
     const [open, setOpen] = useState(false)
+
+    const addParams = useCallback((key:string,value:string)=>{
+        setSettings(prev=>({...prev,[key]:value}))
+    },[setSettings])
+
+    const levelCard  = useMemo(()=>{
+        return [
+            {
+                icon: <IoIosContrast />,
+                title: 'Contrasts',
+                levels: []
+            },
+            {
+                icon:<IoIosContrast />,
+                title:"Bigger Text",
+                onClear:()=>addParams('zoom','1'),
+                levels:[
+                    {
+                        title: "Bigger text",
+                        onClick: () => addParams('zoom','1.2'),
+                        icon: <RiText />,
+                    },
+                    {
+                        title: "Bigger text",
+                        onClick: () => addParams('zoom','1.3'),
+
+                        icon: <RiText />,
+                    },
+                    {
+                        title: "Bigger text",
+                        onClick: () => addParams('zoom','1.5'),
+
+                        icon: <RiText />,
+                    },
+                ]
+            }
+        ] as LevelCardProps[]
+    },[addParams])
 
     return (
         <>
@@ -43,41 +85,13 @@ function Accessibility() {
                     },
                 }}
             >
-                <div className={"grid grid-cols-2 gap-4"}>
-                    <LevelCard
-                        icon={<IoIosContrast />}
-                        title={"Contrast +"}
-                        levels={[
-                            {
-                                title: "İnvert Colors",
-                                onClick: () =>
-                                    console.log(
-                                        "İnvert colors",
-                                    ),
-                                icon: <BsDisplay />,
-                            },
-                            {
-                                title: "Dark Contrast",
-                                onClick: () =>
-                                    console.log(
-                                        "Dark Contrast",
-                                    ),
-                                icon: <BsFillDisplayFill />,
-                            },
-                            {
-                                title: "Light Contrast",
-                                onClick: () =>
-                                    console.log(
-                                        "Light Contrast",
-                                    ),
-                                icon: <BsPcDisplay />,
-                            },
-                        ]}
-                    />
-                </div>
+                <LevelCards cards={levelCard}/>
             </Drawer>
         </>
     )
 }
 
 export default Accessibility
+
+
+

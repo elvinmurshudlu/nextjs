@@ -6,7 +6,7 @@ function Layout({ children }: PropsWithChildren) {
         <>
             {children}
 
-            <Accessibility />
+
         </>
     )
 }
