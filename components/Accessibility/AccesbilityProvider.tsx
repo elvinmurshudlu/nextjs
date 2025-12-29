@@ -6,13 +6,12 @@ import {
     PropsWithChildren,
     SetStateAction,
     use,
-    useCallback,
     useState,
 } from "react"
 import Accessibility from "@/components/Accessibility/Accessibility"
 import clsx from "clsx"
 
-type SettingsProps = Record<string, string>
+type SettingsProps = Record<string, string | number>
 
 const AccessibilityContext = createContext<{
     settings: SettingsProps
@@ -42,7 +41,7 @@ function AccessibilityProvider({
             <div
                 style={{
                     zoom: settings["zoom"],
-                    filter: settings["filter"],
+                    filter: settings["filter"]?.toString(),
                 }}
                 className={clsx("bg-white h-full", {
                     "scale-100":

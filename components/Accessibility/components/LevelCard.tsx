@@ -9,24 +9,27 @@ import {
     useRef,
     useState,
 } from "react"
+import {useAccessibility} from "@/components/Accessibility/AccesbilityProvider";
 
 export type LevelCardProps = {
     icon: ReactNode
     title: string
     levels: Levels[]
-    onClear?: () => void
+    keyName:string
 }
 type Levels = {
     icon: ReactNode
     title: string
-    onClick: () => void
+
+    value:string | number
 }
 
 const LevelCard = memo(function LevelCard({
     icon,
     title,
     levels,
-    onClear,
+
+    keyName
 }: LevelCardProps) {
     const [currentLevel, setCurrentLevel] =
         useState<number>(-1)
@@ -35,19 +38,16 @@ const LevelCard = memo(function LevelCard({
         currentLevel === -1
             ? { icon, title }
             : levels[currentLevel]
-
-    // const stepOnClick = useCallback(() => {
-    //     setCurrentLevel((curr) => {
-    //         const _next = curr + 1
-    //         if (_next >= levels.length) {
-    //             onClear?.()
-    //             return -1
-    //         }
-    //         levels[_next].onClick()
-    //         return _next
-    //     })
-    // }, [setCurrentLevel, onClear, levels])
-
+    const { setSettings } = useAccessibility()
+    const addParams = useCallback(
+        (key: string, value: string | number) => {
+            setSettings((prev) => ({
+                ...prev,
+                [key]: value,
+            }))
+        },
+        [setSettings],
+    )
     const stepOnClick = useCallback(() => {
         setCurrentLevel((curr) => {
             const _next = curr + 1
@@ -64,9 +64,10 @@ const LevelCard = memo(function LevelCard({
             currentLevel >= 0 &&
             currentLevel < levels.length
         ) {
-            levels[currentLevel].onClick()
-        } else if (currentLevel == -1) onClear?.()
-    }, [currentLevel, levels, onClear])
+            addParams(keyName,levels[currentLevel].value)
+
+        } else if (currentLevel == -1) addParams(keyName,'')
+    }, [currentLevel, levels,  addParams,keyName])
 
     return (
         <div
@@ -103,17 +104,14 @@ function LevelBadge({
     levels: Levels[]
     current: number
 }) {
-    // useEffect(() => {
-    //     if (current >= 0) levels[current].onClick()
-    // }, [current, levels])
-
     return (
         <div
             className={clsx(
                 "w-full flex gap-1 transition ",
                 {
-                    "opacity-0": current === -1,
-                    "opacity-100": current !== -1,
+                    "opacity-0": current === -1 ,
+                    "opacity-100": current !== -1  ,
+                    "hidden" : levels.length <= 1
                 },
             )}
         >

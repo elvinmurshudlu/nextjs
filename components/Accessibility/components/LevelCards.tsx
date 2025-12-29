@@ -14,10 +14,11 @@ export const LevelCards = memo(function LevelCards({
                 return (
                     <LevelCard
                         key={i}
+                        keyName={level.keyName}
                         icon={level.icon}
                         title={level.title}
                         levels={level.levels}
-                        onClear={level.onClear}
+
                     />
                 )
             })}

@@ -3,87 +3,66 @@
 import { Button, Drawer } from "antd"
 import { FaUniversalAccess } from "react-icons/fa"
 import {
-    useCallback,
-    useEffect,
     useMemo,
     useState,
 } from "react"
 import { useTranslations } from "next-intl"
-import LevelCard, {
+import  {
     LevelCardProps,
 } from "@/components/Accessibility/components/LevelCard"
-import { MdOutlineAccessAlarm } from "react-icons/md"
 import { IoIosContrast } from "react-icons/io"
-import {
-    BsDisplay,
-    BsFillDisplayFill,
-    BsPcDisplay,
-} from "react-icons/bs"
 import { RiText } from "react-icons/ri"
-import { useAccessibility } from "@/components/Accessibility/AccesbilityProvider"
 import { LevelCards } from "@/components/Accessibility/components/LevelCards"
+import {CgEditContrast} from "react-icons/cg";
+import {TbContrast2Filled} from "react-icons/tb";
 
 function Accessibility() {
-    const { setSettings } = useAccessibility()
     const t = useTranslations("Accessibility")
     const [open, setOpen] = useState(false)
-
-    const addParams = useCallback(
-        (key: string, value: string) => {
-            setSettings((prev) => ({
-                ...prev,
-                [key]: value,
-            }))
-        },
-        [setSettings],
-    )
 
     const levelCard = useMemo(() => {
         return [
             {
-                icon: <IoIosContrast />,
+                icon: <CgEditContrast />,
                 title: "Contrasts",
+                keyName:'filter',
                 levels: [
                     {
                         title: "Bigger Text",
-                        onClick: () =>
-                            addParams(
-                                "filter",
-                                "invert(100%)",
-                            ),
-                        icon: <RiText size={22} />,
+                        value:'invert(100%)',
+                        icon: <TbContrast2Filled />,
                     },
+                    // {
+                    //     value: 'invert(1) hue-rotate(180deg)',
+                    //     title: 'Əksinə çevir',
+                    //     icon: <RiText size={22} />,
+                    // }
                 ],
             },
             {
                 icon: <RiText size={20} />,
                 title: "Bigger Text",
-                onClear: () => addParams("zoom", "1"),
+                keyName:'zoom',
                 levels: [
                     {
                         title: "Bigger Text",
-                        onClick: () =>
-                            addParams("zoom", "1.2"),
+                        value: '1.2',
                         icon: <RiText size={22} />,
                     },
                     {
                         title: "Bigger Text",
-                        onClick: () =>
-                            addParams("zoom", "1.3"),
-
+                        value: '1.3',
                         icon: <RiText size={24} />,
                     },
                     {
                         title: "Bigger Text",
-                        onClick: () =>
-                            addParams("zoom", "1.5"),
-
+                        value: '1.5',
                         icon: <RiText size={26} />,
                     },
                 ],
             },
         ] as LevelCardProps[]
-    }, [addParams])
+    }, [ ])
 
     return (
         <>
