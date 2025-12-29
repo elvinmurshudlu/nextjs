@@ -28,33 +28,72 @@ export function useAccessibility() {
 }
 
 function AccessibilityProvider({
-    children,
-}: PropsWithChildren) {
+                                   children,
+                               }: PropsWithChildren) {
     const [settings, setSettings] = useState<SettingsProps>(
         {},
     )
 
     return (
         <AccessibilityContext
-            value={{ setSettings, settings }}
+            value={{setSettings, settings}}
         >
             <div
                 style={{
                     zoom: settings["zoom"],
                     filter: settings["filter"]?.toString(),
+
+
                 }}
-                className={clsx("bg-white h-full", {
+                className={clsx("bg-white h-full  ",settings['letter'],settings['text'], {
                     "scale-100":
                         settings["scale"] === "110%",
                     "scale-110":
                         settings["scale"] === "130%",
                     "scale-140":
                         settings["scale"] === "140%",
+                    "selected-link": settings["link"] === "link",
+
                 })}
             >
                 {children}
             </div>
-            <Accessibility />
+            <Accessibility/>
+
+            <style>
+                {`
+                .selected-link > * > a{
+                color: yellow !important;
+                text-decoration: underline !important;
+                background-color: black !important;
+                padding: 2px 4px !important;
+                
+                }
+                
+                .letter-spacing-small  > *{
+                letter-spacing: 1.4px !important;}
+                
+                 .letter-spacing-medium > *{
+                letter-spacing: 1.6px !important;}
+                
+                 .letter-spacing-large > *{
+                letter-spacing: 1.9px !important;}
+                
+                .left-align > *{
+                text-align: left !important;
+                }
+                
+                .right-align > *{
+                text-align: right !important;
+                }
+                
+                .center-align > *{
+                text-align: center !important;
+                }
+                
+                
+                `}
+            </style>
         </AccessibilityContext>
     )
 }
