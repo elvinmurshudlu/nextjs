@@ -2,19 +2,14 @@
 
 import { Button, Drawer } from "antd"
 import { FaUniversalAccess } from "react-icons/fa"
-import {
-    useMemo,
-    useState,
-} from "react"
+import { useMemo, useState } from "react"
 import { useTranslations } from "next-intl"
-import  {
-    LevelCardProps,
-} from "@/components/Accessibility/components/LevelCard"
+import { LevelCardProps } from "@/components/Accessibility/components/LevelCard"
 import { IoIosContrast } from "react-icons/io"
 import { RiText } from "react-icons/ri"
 import { LevelCards } from "@/components/Accessibility/components/LevelCards"
-import {CgEditContrast} from "react-icons/cg";
-import {TbContrast2Filled} from "react-icons/tb";
+import { CgEditContrast } from "react-icons/cg"
+import { TbContrast2Filled } from "react-icons/tb"
 
 function Accessibility() {
     const t = useTranslations("Accessibility")
@@ -25,11 +20,11 @@ function Accessibility() {
             {
                 icon: <CgEditContrast />,
                 title: "Contrasts",
-                keyName:'filter',
+                keyName: "filter",
                 levels: [
                     {
                         title: "Bigger Text",
-                        value:'invert(100%)',
+                        value: "invert(100%)",
                         icon: <TbContrast2Filled />,
                     },
                     // {
@@ -42,27 +37,27 @@ function Accessibility() {
             {
                 icon: <RiText size={20} />,
                 title: "Bigger Text",
-                keyName:'zoom',
+                keyName: "zoom",
                 levels: [
                     {
                         title: "Bigger Text",
-                        value: '1.2',
+                        value: "1.2",
                         icon: <RiText size={22} />,
                     },
                     {
                         title: "Bigger Text",
-                        value: '1.3',
+                        value: "1.3",
                         icon: <RiText size={24} />,
                     },
                     {
                         title: "Bigger Text",
-                        value: '1.5',
+                        value: "1.5",
                         icon: <RiText size={26} />,
                     },
                 ],
             },
         ] as LevelCardProps[]
-    }, [ ])
+    }, [])
 
     return (
         <>

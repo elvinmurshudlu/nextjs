@@ -9,19 +9,19 @@ import {
     useRef,
     useState,
 } from "react"
-import {useAccessibility} from "@/components/Accessibility/AccesbilityProvider";
+import { useAccessibility } from "@/components/Accessibility/AccesbilityProvider"
 
 export type LevelCardProps = {
     icon: ReactNode
     title: string
     levels: Levels[]
-    keyName:string
+    keyName: string
 }
 type Levels = {
     icon: ReactNode
     title: string
 
-    value:string | number
+    value: string | number
 }
 
 const LevelCard = memo(function LevelCard({
@@ -29,7 +29,7 @@ const LevelCard = memo(function LevelCard({
     title,
     levels,
 
-    keyName
+    keyName,
 }: LevelCardProps) {
     const [currentLevel, setCurrentLevel] =
         useState<number>(-1)
@@ -64,10 +64,10 @@ const LevelCard = memo(function LevelCard({
             currentLevel >= 0 &&
             currentLevel < levels.length
         ) {
-            addParams(keyName,levels[currentLevel].value)
-
-        } else if (currentLevel == -1) addParams(keyName,'')
-    }, [currentLevel, levels,  addParams,keyName])
+            addParams(keyName, levels[currentLevel].value)
+        } else if (currentLevel == -1)
+            addParams(keyName, "")
+    }, [currentLevel, levels, addParams, keyName])
 
     return (
         <div
@@ -109,9 +109,9 @@ function LevelBadge({
             className={clsx(
                 "w-full flex gap-1 transition ",
                 {
-                    "opacity-0": current === -1 ,
-                    "opacity-100": current !== -1  ,
-                    "hidden" : levels.length <= 1
+                    "opacity-0": current === -1,
+                    "opacity-100": current !== -1,
+                    hidden: levels.length <= 1,
                 },
             )}
         >

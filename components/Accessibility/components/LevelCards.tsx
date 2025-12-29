@@ -18,7 +18,6 @@ export const LevelCards = memo(function LevelCards({
                         icon={level.icon}
                         title={level.title}
                         levels={level.levels}
-
                     />
                 )
             })}
