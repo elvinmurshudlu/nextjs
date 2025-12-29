@@ -10,8 +10,8 @@ import { RiText } from "react-icons/ri"
 import { LevelCards } from "@/components/Accessibility/components/LevelCards"
 import { CgEditContrast } from "react-icons/cg"
 import { TbContrast2Filled } from "react-icons/tb"
-import {PiCursorThin} from "react-icons/pi";
-import {IoLink} from "react-icons/io5";
+import { PiCursorThin } from "react-icons/pi"
+import { IoLink } from "react-icons/io5"
 
 function Accessibility() {
     const t = useTranslations("Accessibility")
@@ -29,7 +29,6 @@ function Accessibility() {
                         value: "invert(100%)",
                         icon: <TbContrast2Filled />,
                     },
-
                 ],
             },
             {
@@ -55,63 +54,61 @@ function Accessibility() {
                 ],
             },
             {
-                title:'Link seçin',
-                icon:<IoLink />,
-                keyName:"link",
-                levels:[
+                title: "Link seçin",
+                icon: <IoLink />,
+                keyName: "link",
+                levels: [
                     {
-                        title: 'Link seçin',
+                        title: "Link seçin",
                         icon: <IoLink />,
-                        value: 'link'
-                    }
-                ]
+                        value: "link",
+                    },
+                ],
             },
             {
-                title:'Mətn boşluğu',
-                icon:<IoLink />,
-                keyName:"letter",
-                levels:[
+                title: "Mətn boşluğu",
+                icon: <IoLink />,
+                keyName: "letter",
+                levels: [
                     {
-                        title: 'Yüngül boşluq',
+                        title: "Yüngül boşluq",
                         icon: <IoLink />,
-                        value: 'letter-spacing-small'
+                        value: "letter-spacing-small",
                     },
                     {
-                        title: 'Orta boşluq',
+                        title: "Orta boşluq",
                         icon: <IoLink />,
-                        value: 'letter-spacing-medium'
+                        value: "letter-spacing-medium",
                     },
                     {
-                        title: 'Ağır boşluq',
+                        title: "Ağır boşluq",
                         icon: <IoLink />,
-                        value: 'letter-spacing-large'
+                        value: "letter-spacing-large",
                     },
-
-                ]
+                ],
             },
             {
-                title:'Mətn align',
-                icon:<IoLink />,
-                keyName:"text",
-                levels:[
+                title: "Mətn align",
+                icon: <IoLink />,
+                keyName: "text",
+                levels: [
                     {
-                        title: 'Sola düzəldin',
+                        title: "Sola düzəldin",
                         icon: <IoLink />,
-                        value: 'left-align'
+                        value: "left-align",
                     },
                     {
-                        title: 'Sağa düzəldin',
+                        title: "Sağa düzəldin",
                         icon: <IoLink />,
-                        value: 'right-align'
+                        value: "right-align",
                     },
                     {
-                        title: 'Mərkəzə düzəldin',
+                        title: "Mərkəzə düzəldin",
                         icon: <IoLink />,
-                        value: 'center-align'
+                        value: "center-align",
                     },
-
-                ]
-            }
+                ],
+            },
         ]
     }, [])
 
