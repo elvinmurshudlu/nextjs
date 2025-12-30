@@ -8,3 +8,9 @@ body {
 .section {
     @apply max-w-7xl mx-auto;
 }
+
+@theme {
+    --color-primary-color: #206eb5;
+    --color-layer: #fcfcfc;
+    --color-secondary-layer: #ffffff;
+}
