@@ -8,7 +8,8 @@
         "start": "next start",
         "lint": "eslint",
         "prettier": "npx prettier . --write",
-        "prepare": "husky"
+        "prepare": "husky",
+        "type-check": "tsc --noEmit"
     },
     "lint-staged": {
         "**/*": "prettier --write --ignore-unknown"
