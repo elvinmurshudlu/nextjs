@@ -12,6 +12,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { loginValidationSchema } from "@/components/UserCreate/schema"
 import { useAction } from "next-safe-action/hooks"
 import { Button } from "antd"
+import FormDatePicker from "@/components/FormBuilder/components/Date/FormDatePicker/FormDatePicker";
 
 function LoginForm() {
     const form = useForm({
@@ -35,6 +36,9 @@ function LoginForm() {
                 label={"Şifrə"}
                 fieldName={"password"}
             />
+
+            <FormDatePicker fieldName={'label'} label={'Test'}/>
+
             {hasErrored && (
                 <p>
                     İstifadəçi şifrəsi və ya ünvanı səhvdir
