@@ -4,3 +4,7 @@ body {
     background: white;
     height: 100dvh;
 }
+
+.section {
+    @apply max-w-7xl mx-auto;
+}

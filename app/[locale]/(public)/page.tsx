@@ -23,7 +23,7 @@ export default async function Home({
 
     if (!session) {
         return (
-            <>
+            <div>
                 {t("title")}{" "}
                 <h1>
                     Lorem ipsum dolor sit amet, consectetur
@@ -53,7 +53,7 @@ export default async function Home({
                     vitae.
                 </h1>{" "}
                 <LoginForm />
-            </>
+            </div>
         )
     }
     return (
