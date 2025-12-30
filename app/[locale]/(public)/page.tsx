@@ -24,7 +24,7 @@ export default async function Home({
     if (!session) {
         return (
             <>
-                {t("title")}
+                {t("title")}{" "}
                 <h1>
                     Lorem ipsum dolor sit amet, consectetur
                     adipisicing elit. Atque, veniam.
@@ -51,7 +51,7 @@ export default async function Home({
                     neque nesciunt nobis optio pariatur
                     perferendis quia quisquam quos saepe
                     vitae.
-                </h1>
+                </h1>{" "}
                 <LoginForm />
             </>
         )
