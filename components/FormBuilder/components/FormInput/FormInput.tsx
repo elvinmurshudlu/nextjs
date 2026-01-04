@@ -10,6 +10,7 @@ function FormInput({
     label,
     fieldName,
     dependOn,
+    showOn,
     ...inputProps
 }: FormInputProps) {
     const { control } = useFormContext()
@@ -20,6 +21,7 @@ function FormInput({
             label={label}
             fieldName={fieldName}
             className={className}
+            showOn={showOn}
         >
             <Controller
                 render={({ field }) => {

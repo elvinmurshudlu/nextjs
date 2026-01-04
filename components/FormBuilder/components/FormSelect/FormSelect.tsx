@@ -12,6 +12,7 @@ function FormSelect({
     fieldName,
     dependOn,
     classNames,
+    showOn,
     ...inputProps
 }: FormSelectProps) {
     const { control } = useFormContext()
@@ -22,6 +23,7 @@ function FormSelect({
             label={label}
             fieldName={fieldName}
             className={className}
+            showOn={showOn}
         >
             <Controller
                 render={({ field }) => {

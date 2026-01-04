@@ -35,6 +35,12 @@ function LoginForm() {
                 label={"Şifrə"}
                 fieldName={"password"}
             />
+
+            <FormInput label={'Test'} fieldName={"test"} />
+            <FormInput label={'Test Condition'} fieldName={"test_condition"}  dependOn={['test']} showOn={([test])=>{
+                return !test
+            }}/>
+
             {hasErrored && (
                 <p>
                     İstifadəçi şifrəsi və ya ünvanı səhvdir

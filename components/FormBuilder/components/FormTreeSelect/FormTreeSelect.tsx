@@ -12,6 +12,7 @@ function FormTreeSelect({
     fieldName,
     dependOn,
     classNames,
+    showOn,
     ...inputProps
 }: FormTreeSelectProps) {
     const { control } = useFormContext()
@@ -22,6 +23,7 @@ function FormTreeSelect({
             label={label}
             fieldName={fieldName}
             className={className}
+            showOn={showOn}
         >
             <Controller
                 render={({ field }) => {

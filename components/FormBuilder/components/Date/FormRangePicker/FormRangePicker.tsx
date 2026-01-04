@@ -17,6 +17,7 @@ function FormRangePicker({
     label,
     fieldName,
     dependOn,
+    showOn,
     ...props
 }: FormDatePickerProps) {
     const { watch, setValue } = useFormContext()
@@ -31,6 +32,7 @@ function FormRangePicker({
             label={label}
             fieldName={fieldName[1]}
             className={className}
+            showOn={showOn}
         >
             return{" "}
             <DatePicker.RangePicker

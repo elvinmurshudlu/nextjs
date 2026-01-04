@@ -15,6 +15,7 @@ function FormDatePicker({
     label,
     fieldName,
     dependOn,
+    showOn,
     ...props
 }: FormDatePickerProps) {
     const { control } = useFormContext()
@@ -25,6 +26,7 @@ function FormDatePicker({
             label={label}
             fieldName={fieldName}
             className={className}
+            showOn={showOn}
         >
             <Controller
                 render={({ field }) => {

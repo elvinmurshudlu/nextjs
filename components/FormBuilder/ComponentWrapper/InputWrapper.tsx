@@ -1,37 +1,36 @@
 import {
     PropsWithChildren,
-    useEffect,
+    useEffect, useMemo,
     useRef,
     useState,
 } from "react"
 import clsx from "clsx"
-import { ErrorMessage } from "@hookform/error-message"
-import { useFormContext } from "react-hook-form"
-import { IFormComponent } from "@/components/FormBuilder/type"
+import {ErrorMessage} from "@hookform/error-message"
+import {useFormContext} from "react-hook-form"
+import {IFormComponent} from "@/components/FormBuilder/type"
 
 function ComponentWrapper({
-    className,
-    children,
-    fieldName,
-    label,
-    dependOn,
-}: PropsWithChildren<IFormComponent>) {
-    const [canRender] = useState(true)
-
+                              className,
+                              children,
+                              fieldName,
+                              label,
+                              dependOn,
+                              showOn
+                          }: PropsWithChildren<IFormComponent>) {
     const {
-        formState: { errors },
+        formState: {errors},
         watch,
         setValue,
     } = useFormContext()
-    const initialDependedValue = useRef<string>("")
 
+    const initialDependedValue = useRef<string>("")
     const dependedValues = watch(dependOn ?? [])
     const dependedValuesString = dependedValues.toString()
 
     useEffect(() => {
         if (
             dependedValuesString !==
-                initialDependedValue.current &&
+            initialDependedValue.current &&
             initialDependedValue.current !== ""
         ) {
             setValue(fieldName, null)
@@ -39,8 +38,12 @@ function ComponentWrapper({
         initialDependedValue.current = dependedValuesString
     }, [dependedValuesString, setValue, fieldName])
 
-    if (!canRender) return null
+    const canRender = useMemo(() => {
+        if (!showOn) return true
+        return showOn(dependedValues)
+    }, [showOn, dependedValues])
 
+    if (!canRender) return null
     return (
         <div
             className={clsx(
@@ -53,7 +56,7 @@ function ComponentWrapper({
             <ErrorMessage
                 errors={errors}
                 name={fieldName}
-                render={({ message }) => <p>{message}</p>}
+                render={({message}) => <p>{message}</p>}
             />
         </div>
     )
