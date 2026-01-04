@@ -36,10 +36,15 @@ function LoginForm() {
                 fieldName={"password"}
             />
 
-            <FormInput label={'Test'} fieldName={"test"} />
-            <FormInput label={'Test Condition'} fieldName={"test_condition"}  dependOn={['test']} showOn={([test])=>{
-                return !test
-            }}/>
+            <FormInput label={"Test"} fieldName={"test"} />
+            <FormInput
+                label={"Test Condition"}
+                fieldName={"test_condition"}
+                dependOn={["test"]}
+                showOn={([test]) => {
+                    return !test
+                }}
+            />
 
             {hasErrored && (
                 <p>

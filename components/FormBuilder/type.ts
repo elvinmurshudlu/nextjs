@@ -2,7 +2,7 @@ interface BaseFormComponentProps {
     label: string
     className?: string
     dependOn?: string[]
-    showOn?: (val:unknown[])=>boolean
+    showOn?: (val: unknown[]) => boolean
 }
 
 export interface IFormComponent extends BaseFormComponentProps {
